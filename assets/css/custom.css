@@ -1,114 +1,10 @@
-/* custom.css – Final consolidated CSS for LD assignment */
-/* 1. Ensure semantic layout is respected (no direct styling needed here, but assumed in HTML) */
-/* 2. Custom CSS Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes pulseGlow {
-  0% {
-    box-shadow: 0 0 0 0 rgba(71, 4, 116, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 12px rgba(71, 4, 116, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(71, 4, 116, 0);
-  }
-}
+/* custom.css – Final version: Center all main sections */
 
-/* 3. CSS-only loader (spinner) */
-#custom-preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999999;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-#custom-preloader.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-#custom-preloader .spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(71, 4, 116, 0.2);
-  border-top-color: #470474;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* 4. Apply animations with prefers-reduced-motion support */
-@media (prefers-reduced-motion: no-preference) {
-  .section,
-  .hero,
-  .about,
-  .skills,
-  .resume,
-  .portfolio,
-  .services,
-  .testimonials,
-  .contact {
-    animation: fadeInUp 0.8s ease-out forwards;
-    opacity: 0;
-  }
-  /* Staggered animation delay for sections */
-  .hero { animation-delay: 0.1s; }
-  .about { animation-delay: 0.2s; }
-  .skills { animation-delay: 0.3s; }
-  .resume { animation-delay: 0.4s; }
-  .portfolio { animation-delay: 0.5s; }
-  .services { animation-delay: 0.6s; }
-  .testimonials { animation-delay: 0.7s; }
-  .contact { animation-delay: 0.8s; }
-
-  /* Hover glow effect on buttons/links */
-  a:hover,
-  .btn:hover,
-  .navmenu a:hover,
-  .footer .social-links a:hover {
-    animation: pulseGlow 1.5s infinite;
-  }
-}
-
-/* 5. Optional: Animated gradient background */
-.hero.animated-gradient {
+/* ================== PAGE BACKGROUND ================== */
+body.index-page {
   background: linear-gradient(135deg, #470474, #6a0dad, #470474);
-  background-size: 300% 300%;
-  animation: gradientShift 8s ease infinite;
-  position: relative;
-}
-.hero.animated-gradient::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: inherit;
-  opacity: 0.85;
-  z-index: 1;
-}
-.hero.animated-gradient > * {
-  position: relative;
-  z-index: 2;
-  color: white !important;
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
 }
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
@@ -116,86 +12,56 @@
   100% { background-position: 0% 50%; }
 }
 
-/* 6. Optional: Decorative floating shapes */
-.floating-shapes {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-.floating-shapes .shape {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(71,4,116,0.15), transparent 70%);
-  animation: float 15s infinite ease-in-out;
-}
-.floating-shapes .shape:nth-child(1) {
-  width: 100px;
-  height: 100px;
-  top: 20%;
-  left: 10%;
-  animation-delay: 0s;
-}
-.floating-shapes .shape:nth-child(2) {
-  width: 60px;
-  height: 60px;
-  top: 60%;
-  left: 80%;
-  animation-delay: -5s;
-}
-.floating-shapes .shape:nth-child(3) {
-  width: 80px;
-  height: 80px;
-  top: 40%;
-  left: 50%;
-  animation-delay: -10s;
-}
-@keyframes float {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(20px, -30px) rotate(5deg); }
-  50% { transform: translate(-15px, 20px) rotate(-3deg); }
-  75% { transform: translate(10px, 15px) rotate(2deg); }
-}
-
-/* Hide decorative shapes if motion is reduced */
-@media (prefers-reduced-motion: reduce) {
-  .floating-shapes,
-  .section,
-  .hero,
-  .about,
-  .skills,
-  .resume,
-  .portfolio,
-  .services,
-  .testimonials,
-  .contact,
-  a:hover,
-  .btn:hover,
-  .navmenu a:hover,
-  .footer .social-links a:hover {
-    animation: none !important;
+/* ================== FIX MAIN AREA OFFSET (Desktop) ================== */
+@media (min-width: 1200px) {
+  main.main {
+    margin-left: 200px;
+    width: calc(100% - 200px);
   }
 }
 
-/* === NAVIGATION BUTTONS GRADIENT + HOVER EFFECT === */
-.navmenu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* ================== CENTER ALL SECTIONS ================== */
+main .section,
+footer.footer {
+  background-color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  margin: 2rem auto !important;
+  padding: 2rem 0 !important;
+  max-width: 900px;
+  width: 90%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  position: relative;
+  z-index: 1;
 }
+
+/* Inner container: consistent padding & alignment */
+main .section > .container,
+footer.footer > .container {
+  max-width: 860px;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  margin: 0 auto;
+}
+
+/* ================== HERO SECTION ================== */
+.hero {
+  min-height: auto !important;
+  padding: 3rem 0 !important;
+  background: transparent !important;
+  text-align: center;
+}
+
+
+/* ================== NAVIGATION BUTTONS ================== */
 .navmenu a {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 12px 20px;
-  text-decoration: none;
   color: white !important;
-  font-weight: 500;
+  text-decoration: none;
   border-radius: 8px;
-  transition: all 0.3s ease;
   background: linear-gradient(135deg, #470474, #6a0dad);
   margin: 6px 0;
 }
@@ -206,5 +72,44 @@
 }
 .navmenu a.active {
   background: linear-gradient(135deg, #5a0a8f, #7b1fc9);
-  box-shadow: 0 2px 8px rgba(71, 4, 116, 0.3);
+}
+
+/* ================== ANIMATIONS (Optional) ================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(71, 4, 116, 0.4); }
+  70% { box-shadow: 0 0 0 12px rgba(71, 4, 116, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(71, 4, 116, 0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main .section,
+  footer.footer {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  #hero { animation-delay: 0.1s; }
+  #about { animation-delay: 0.2s; }
+  #skills { animation-delay: 0.3s; }
+  #resume { animation-delay: 0.4s; }
+  #services { animation-delay: 0.5s; }
+  #contact { animation-delay: 0.6s; }
+
+  a:hover,
+  .btn:hover,
+  .navmenu a:hover,
+  .footer .social-links a:hover {
+    animation: pulseGlow 1.5s infinite;
+  }
+}
+
+/* ================== REDUCED MOTION ================== */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; }
+  body.index-page {
+    background: linear-gradient(135deg, #470474, #6a0dad);
+  }
 }
